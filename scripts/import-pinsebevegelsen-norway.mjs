@@ -66,7 +66,7 @@ async function getChurchList(region) {
   return [...seen.values()];
 }
 
-function extractDetail(html, urlBase) {
+function extractDetail(html) {
   // Address — find the contact-value div with address-part spans
   const addrMatch = html.match(/<td[^>]*class="contact-value">([\s\S]*?)<\/td>/);
   let address = null;
@@ -125,7 +125,7 @@ async function main() {
       const ch = allChurches[i];
       const html = await fetchHtml(`${BASE}/menighet/kirke/people_organization/${ch.id}`);
       if (html) {
-        const detail = extractDetail(html, BASE);
+        const detail = extractDetail(html);
         results.push({ ...ch, ...detail });
       } else {
         results.push({ ...ch, address: null, email: null, phone: null, website: null });

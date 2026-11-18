@@ -165,7 +165,7 @@ const commands = {
     let success = 0;
     for (const url of urls) {
       try {
-        const res = await sendSingle(client, url);
+        await sendSingle(client, url);
         console.log(`✓ ${url.replace(SITE_URL, '')}`);
         success++;
       } catch (e) {

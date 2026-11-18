@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 import { createClient } from "@supabase/supabase-js";
 import { ApifyClient } from "apify-client";
 import { loadLocalEnv } from "./lib/local-env.mjs";
-import { mapWithConcurrency, sleep } from "./lib/enrichment/rate-limiter.mjs";
+import { sleep } from "./lib/enrichment/rate-limiter.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = join(__dirname, "..");

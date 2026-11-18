@@ -158,7 +158,7 @@ async function main() {
 
       // Push to churches table where missing
       if (website || parsed.email || parsed.phone) {
-        const result = await sql`
+        await sql`
           UPDATE churches SET
             website = COALESCE(NULLIF(website, ''), ${website}),
             email = COALESCE(NULLIF(email, ''), ${parsed.email}),

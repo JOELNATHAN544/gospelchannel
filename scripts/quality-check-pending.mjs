@@ -20,7 +20,6 @@ import sharp from "sharp";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadLocalEnv } from "./lib/local-env.mjs";
-import { findLikelyHeroImage } from "./lib/church-quality.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT_DIR = resolve(__dirname, "..");
@@ -182,7 +181,7 @@ Extract this JSON:
   }
 }
 
-async function processHeroImage(imageUrl, slug) {
+async function processHeroImage(imageUrl) {
   if (!imageUrl || isBlockedImageHost(imageUrl)) return null;
 
   const buf = await fetchImage(imageUrl);
@@ -287,7 +286,7 @@ async function processChurch(church) {
   let heroUrl = null;
   if (analysis.hero_image_url) {
     console.log(`  📸 Downloading hero image...`);
-    const img = await processHeroImage(analysis.hero_image_url, church.slug);
+    const img = await processHeroImage(analysis.hero_image_url);
     if (img) {
       if (DRY_RUN) {
         console.log(`  [DRY RUN] Would upload hero ${img.width}x${img.height}`);

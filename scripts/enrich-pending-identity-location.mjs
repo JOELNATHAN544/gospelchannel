@@ -186,7 +186,6 @@ async function main() {
   console.log(`Pending identity/location candidates: ${selected.length}`);
 
   const results = await mapWithConcurrency(selected, options.concurrency, async (church) => {
-    const enrichment = enrichmentMap.get(church.slug);
     const html = await fetchHtml(church.website);
     if (!html) {
       return { slug: church.slug, updated: false, reason: "fetch_failed" };

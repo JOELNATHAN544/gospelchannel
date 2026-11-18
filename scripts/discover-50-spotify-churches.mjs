@@ -88,15 +88,6 @@ async function searchPlaylists(token, query, offset = 0) {
   return [];
 }
 
-async function getPlaylistDetails(token, playlistId) {
-  const res = await fetch(
-    `https://api.spotify.com/v1/playlists/${playlistId}?fields=name,description,tracks.total,external_urls,images,owner`,
-    { headers: { Authorization: `Bearer ${token}` } }
-  );
-  if (!res.ok) return null;
-  return res.json();
-}
-
 // ─── Church keyword matching ─────────────────────────────────────────────────
 
 const CHURCH_KEYWORDS = [

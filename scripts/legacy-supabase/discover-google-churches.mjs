@@ -658,7 +658,7 @@ async function main() {
 
     if (rows.length > 0) {
       // Save churches (without the place reference)
-      const churchRows = rows.map(({ place: _, ...rest }) => rest);
+      const churchRows = rows.map((row) => { const rest = { ...row }; delete rest.place; return rest; });
       const { error } = await supabase
         .from("churches")
         .upsert(churchRows, { onConflict: "slug", ignoreDuplicates: true });

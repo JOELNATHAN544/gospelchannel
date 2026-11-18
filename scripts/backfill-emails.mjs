@@ -58,7 +58,7 @@ function extractEmails(html) {
   );
 }
 
-function pickBestEmail(emails, churchName) {
+function pickBestEmail(emails) {
   if (emails.length === 0) return null;
   if (emails.length === 1) return emails[0];
 
@@ -120,7 +120,7 @@ async function findEmailForChurch(church) {
     if (allEmails.size > 0 && i >= 2) break;
   }
 
-  return pickBestEmail([...allEmails], church.name);
+  return pickBestEmail([...allEmails]);
 }
 
 function parseFlag(name, fallback = null) {
@@ -177,7 +177,7 @@ async function main() {
 
   for (let i = 0; i < churches.length; i += CONCURRENCY) {
     const batch = churches.slice(i, i + CONCURRENCY);
-    const results = await Promise.allSettled(
+    await Promise.allSettled(
       batch.map(async (church) => {
         const email = await findEmailForChurch(church);
         if (email) {

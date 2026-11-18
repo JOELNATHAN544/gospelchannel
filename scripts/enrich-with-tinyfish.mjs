@@ -72,30 +72,6 @@ async function runTinyFish(url) {
   return null;
 }
 
-async function downloadAndUploadHero(imageUrl, slug) {
-  try {
-    const res = await fetch(imageUrl, { redirect: "follow" });
-    if (!res.ok) return null;
-
-    const contentType = res.headers.get("content-type") || "";
-    if (!contentType.startsWith("image/")) return null;
-
-    const buffer = Buffer.from(await res.arrayBuffer());
-    if (buffer.length < 5000) return null; // too small
-
-    // Upload to R2 via the media endpoint
-    const ext = contentType.includes("png") ? "png" : "jpg";
-    const r2Key = `heroes/${slug}.${ext}`;
-    const uploadUrl = `https://media.gospelchannel.com/${r2Key}`;
-
-    // We can't upload to R2 directly from script without binding,
-    // so we'll just return the source URL for now
-    return imageUrl;
-  } catch {
-    return null;
-  }
-}
-
 async function main() {
   let churches;
 

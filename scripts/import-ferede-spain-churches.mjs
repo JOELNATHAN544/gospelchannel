@@ -9,13 +9,10 @@ import {
   createChurchIndex,
   decodeHtml,
   findChurchDuplicate,
-  isOfficialWebsiteUrl,
   normalizeWhitespace,
   slugifyName,
-  toSiteRoot,
 } from "./lib/church-intake-utils.mjs";
 import {
-  addHostLocationEntry,
   buildHostLocationIndex,
   findHostLocationDuplicate,
 } from "./lib/directory-dedupe.mjs";
@@ -70,15 +67,6 @@ async function fetchAllChurches(limit = 0) {
     if (page >= 60) break; // safety cap
   }
   return limit > 0 ? all.slice(0, limit) : all;
-}
-
-function cleanWebsite(raw) {
-  if (!raw) return "";
-  const trimmed = String(raw).trim();
-  if (!trimmed) return "";
-  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
-  if (!isOfficialWebsiteUrl(withProtocol)) return "";
-  return toSiteRoot(withProtocol);
 }
 
 function capitalize(s = "") {

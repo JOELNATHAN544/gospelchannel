@@ -147,7 +147,7 @@ async function main() {
               updated_at = (unixepoch() * 1000)
           `;
           if (primary && primary !== "Unknown") detected += 1;
-        } catch (e) {
+        } catch {
           // ignore individual failures
         }
       }

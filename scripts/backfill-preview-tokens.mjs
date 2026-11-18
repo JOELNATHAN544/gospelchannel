@@ -48,7 +48,7 @@ async function main() {
           WHERE slug = ${row.slug} AND claim_preview_token IS NULL
         `;
         updated++;
-      } catch (e) {
+      } catch {
         // Unique constraint violation - regenerate
         const retryToken = generateToken();
         try {

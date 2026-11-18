@@ -200,7 +200,7 @@ async function main() {
   let consolidated = 0;
   for (const [from, to] of Object.entries(NETWORK_CONSOLIDATION)) {
     if (!DRY_RUN) {
-      const r = await sql.query(
+      await sql.query(
         `UPDATE church_enrichments SET denomination_network = $1 WHERE denomination_network = $2`,
         [to, from]
       );

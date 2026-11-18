@@ -10,7 +10,6 @@ import {
   decodeHtml,
   findChurchDuplicate,
   isOfficialWebsiteUrl,
-  normalizeWhitespace,
   slugifyName,
   toSiteRoot,
 } from "./lib/church-intake-utils.mjs";
@@ -110,7 +109,7 @@ async function fetchAllSlugs() {
     let items;
     try {
       items = await fetchJson(url);
-    } catch (error) {
+    } catch {
       // 400 typically means we're past the last page
       break;
     }

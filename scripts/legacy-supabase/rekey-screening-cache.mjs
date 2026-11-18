@@ -50,7 +50,8 @@ let skipped = 0;
 for (const entry of screeningArray) {
   const slug = uuidToSlug.get(entry.id);
   if (slug) {
-    const { id, ...rest } = entry;
+    const rest = { ...entry };
+    delete rest.id;
     result.push({ slug, ...rest });
     mapped++;
   } else {

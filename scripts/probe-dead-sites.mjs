@@ -26,7 +26,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { lookup } from "node:dns/promises";
 import { URL } from "node:url";
 import { loadLocalEnv } from "./lib/local-env.mjs";
-import { mapWithConcurrency, sleep } from "./lib/enrichment/rate-limiter.mjs";
+import { mapWithConcurrency } from "./lib/enrichment/rate-limiter.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 loadLocalEnv(resolve(__dirname, ".."));

@@ -183,7 +183,6 @@ async function loadTargets(sql, options) {
         `;
   }
   const where = ["status = 'approved'"];
-  const params = {};
   if (!options.force) where.push("(website IS NULL OR website = '')");
   if (options.country) {
     return options.reasonPrefix

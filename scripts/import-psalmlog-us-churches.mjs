@@ -11,9 +11,6 @@ import {
   slugifyName,
 } from "./lib/church-intake-utils.mjs";
 import {
-  addHostLocationEntry,
-  buildHostLocationIndex,
-  findHostLocationDuplicate,
 } from "./lib/directory-dedupe.mjs";
 import { mapWithConcurrency, sleep } from "./lib/enrichment/rate-limiter.mjs";
 
@@ -445,7 +442,6 @@ async function main() {
   // Load DB state
   const existing = await loadAllChurchRows(sql);
   const index = createChurchIndex();
-  const hostIndex = buildHostLocationIndex(existing);
   const usedSlugs = new Set(existing.map((r) => r.slug));
   for (const r of existing) addChurchToIndex(index, r);
 

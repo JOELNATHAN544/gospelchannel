@@ -138,7 +138,7 @@ async function main() {
         });
         console.log(`  [FOUND] ${church.name} -> ${categorizeUrl(best)}: ${best}`);
       }
-    } catch (err) {
+    } catch {
       // silently skip
     }
 

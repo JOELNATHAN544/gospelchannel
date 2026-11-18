@@ -31,10 +31,6 @@ if (!ANTHROPIC_KEY) {
 }
 
 async function generateDescriptions(churches) {
-  const list = churches
-    .map((c) => `${c.name} | ${c.location || "?"}, ${c.country} | ${c.denomination || "unknown"}`)
-    .join("\n");
-
   const res = await fetch("https://api.anthropic.com/v1/messages", {
     method: "POST",
     headers: {

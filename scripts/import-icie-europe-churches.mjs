@@ -204,7 +204,7 @@ function extractCity(address) {
   return parts[parts.length - 1] || "";
 }
 
-function buildConfidence(entry, website, hasCoords) {
+function buildConfidence(entry, website) {
   let score = 0.65;
   if (website) score += 0.12;
   if (entry.address) score += 0.05;
@@ -349,10 +349,9 @@ async function main() {
     const website = cleanWebsite(entry.website);
     const city = extractCity(entry.address);
     const facebook = normalizeSocial(entry.facebook, "facebook.com");
-    const twitter = normalizeSocial(entry.twitter, "twitter.com") || normalizeSocial(entry.twitter, "x.com");
     const instagram = normalizeSocial(entry.twitter, "instagram.com");
 
-    const confidence = buildConfidence(entry, website, false);
+    const confidence = buildConfidence(entry, website);
 
     const duplicate =
       findHostLocationDuplicate(hostIndex, {

@@ -118,7 +118,7 @@ function extractSpotifyLinks(content) {
   const links = new Set();
   const byType = { artist: [], playlist: [], album: [], track: [] };
   for (const match of content.matchAll(SPOTIFY_LINK_RE)) {
-    const [full, type, id] = match;
+    const [, type, id] = match;
     const clean = `https://open.spotify.com/${type}/${id}`;
     if (links.has(clean)) continue;
     links.add(clean);

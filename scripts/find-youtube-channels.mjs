@@ -139,7 +139,7 @@ JSON:`
   try {
     const jsonMatch = text.match(/\[[\s\S]*\]/);
     if (jsonMatch) return JSON.parse(jsonMatch[0]);
-  } catch (e) {
+  } catch {
     console.error('Claude parse error:', text.substring(0, 200));
   }
   return [];

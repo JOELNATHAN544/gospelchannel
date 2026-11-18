@@ -226,9 +226,8 @@ async function main() {
   // Process with concurrency
   let success = 0;
   let failed = 0;
-  let skipped = 0;
 
-  const results = await mapWithConcurrency(toProcess, concurrency, async (church, i) => {
+  await mapWithConcurrency(toProcess, concurrency, async (church, i) => {
     if (i > 0 && i % concurrency === 0) {
       await sleep(BATCH_DELAY_MS);
     }

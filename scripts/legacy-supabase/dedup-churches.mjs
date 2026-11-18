@@ -155,7 +155,7 @@ async function main() {
   let dupGroups = 0;
   let dupEntries = 0;
 
-  for (const [key, entries] of groups) {
+  for (const entries of groups.values()) {
     if (entries.length <= 1) continue;
 
     dupGroups++;
