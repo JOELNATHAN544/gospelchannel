@@ -187,14 +187,20 @@ export function ChurchGrid({ churches }: { churches: ChurchItem[] }) {
   const urlStyle = searchParams.get("style") || "all";
   const urlQuery = searchParams.get("q") || "";
 
-  useEffect(() => {
+  // Keep local filter state in sync with the URL. Adjusting state during render
+  // (instead of in an effect) avoids an extra cascading render when the URL changes.
+  const [syncedUrlStyle, setSyncedUrlStyle] = useState(urlStyle);
+  if (syncedUrlStyle !== urlStyle) {
+    setSyncedUrlStyle(urlStyle);
     setActiveStyle(urlStyle);
-  }, [urlStyle]);
+  }
 
-  useEffect(() => {
+  const [syncedUrlQuery, setSyncedUrlQuery] = useState(urlQuery);
+  if (syncedUrlQuery !== urlQuery) {
+    setSyncedUrlQuery(urlQuery);
     setSearchQuery(urlQuery);
     setDebouncedQuery(urlQuery.trim());
-  }, [urlQuery]);
+  }
 
   useEffect(() => {
     return () => {

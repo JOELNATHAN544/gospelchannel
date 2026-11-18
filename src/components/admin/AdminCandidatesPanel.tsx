@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useDeferredValue, useState } from "react";
+import { useCallback, useDeferredValue, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AdminCandidatePlaylistButton } from "@/components/admin/AdminCandidatePlaylistButton";
 import { AdminCandidateDetailsForm } from "@/components/admin/AdminCandidateDetailsForm";
@@ -182,13 +182,18 @@ export function AdminCandidatesPanel({ candidates }: Props) {
     });
   }, []);
 
-  const visibleCandidates = candidates.filter((candidate) => {
-    if (!matchesViewFilter(candidate, viewFilter)) return false;
-    return matchesSearch(candidate, deferredSearch);
-  });
+  const visibleCandidates = useMemo(
+    () =>
+      candidates.filter((candidate) => {
+        if (!matchesViewFilter(candidate, viewFilter)) return false;
+        return matchesSearch(candidate, deferredSearch);
+      }),
+    [candidates, viewFilter, deferredSearch]
+  );
 
-  const pendingWeakCandidates = visibleCandidates.filter(
-    (candidate) => candidate.status === "pending" && candidate.confidence < 0.5
+  const pendingWeakCandidates = useMemo(
+    () => visibleCandidates.filter((candidate) => candidate.status === "pending" && candidate.confidence < 0.5),
+    [visibleCandidates]
   );
 
   const handleBulkReject = useCallback(async () => {

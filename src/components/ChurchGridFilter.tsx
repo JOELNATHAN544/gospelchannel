@@ -89,6 +89,9 @@ export function ChurchGridFilter({ churches, totalCount }: ChurchGridFilterProps
   // reshuffle once on mount so returning visitors see a fresh selection.
   const [pool, setPool] = useState<ChurchItem[]>(churches);
   useEffect(() => {
+    // Intentional: the shuffle is random, so it must run after hydration (not during
+    // render) to keep the server-rendered markup and first client render identical.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setPool(shuffleArray(churches));
   }, [churches]);
 
