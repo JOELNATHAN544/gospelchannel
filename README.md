@@ -37,7 +37,7 @@ Free global church guide with worship-aware profiles, built with Next.js 16, Ope
 Prerequisites:
 
 - Node 22.x
-- npm
+- pnpm 10 (run `corepack enable`, the exact version is pinned in `package.json`)
 
 If you use `nvm`, run:
 

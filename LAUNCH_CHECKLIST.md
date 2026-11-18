@@ -19,14 +19,14 @@
   - [ ] `BETTER_AUTH_SECRET`
   - [ ] `NEXT_PUBLIC_SITE_URL`
   - [ ] `CRON_SECRET`
-- [ ] Run `npm run check:env`
+- [ ] Run `pnpm run check:env`
 
 ## 3) Technical verification
 
-- [x] `npm run lint`
-- [x] `npm run build`
-- [x] `npm run check:data`
-- [x] `npm run smoke`
+- [x] `pnpm run lint`
+- [x] `pnpm run build`
+- [x] `pnpm run check:data`
+- [x] `pnpm run smoke`
 - [ ] Run cron with real API keys: `/api/cron/sync?secret=...`
 - [ ] Confirm church pages use Spotify API data (not only manual fallback)
 
